@@ -1,0 +1,84 @@
+PARAMETERS EVOLUTIONARY ALGORITHM
+******************************************
+*      TYPE OF RUN AND SYSTEM            *
+******************************************
+USPEX : calculationMethod (USPEX, VCNEB, META)
+300   : calculationType
+1     : AutoFrac
+ 
+% optType
+enthalpy
+% EndOptType
+
+% atomType
+S  H
+% EndAtomType
+
+% numSpecies
+1  3 
+% EndNumSpecies
+
+% symmetries
+2-230
+% EndSymmetries
+
+% IonDistances
+1.2  0.6
+0.6  0.5
+% EndDistances
+
+
+******************************************
+*           ANTISEEDS                    *
+******************************************
+1 : antiSeedsActivation
+0.010 : antiSeedsMax
+0.005 : antiSeedsSigma
+
+******************************************
+*               POPULATION               *
+******************************************
+32     : populationSize (how many individuals per generation)
+32     : initialPopSize (how many individuals in the first generation)
+10     : numGenerations (how many generations shall be calculated)
+5      : stopCrit       (after how many generations with identical minima to stop)
+0      : reoptOld       (reoptimize KeptBest structures 0/1)
+0.6    : bestFrac       (fraction of best structures to keep)
+
+*********************************
+*********************************
+ 4     : minAt
+ 8     : maxAt
+******************************************
+*          VARIATION OPERATORS           *
+******************************************
+0.60  : fracGene (fraction of generation produced by heredity)
+0.20  : fracRand (fraction of generation produced randomly from space groups)
+0.20  : fracAtomsMut (fraction of the generation produced by softmutation)
+0.20  : fracTrans (variation operator specific of variable composition runs)
+0.10  : fracLatMut (fraction of the generation produced by softmutation)
+0.10  : fracPerm   (fractions of the generation produced by permutation)
+0.00  : fracTopRand (fraction of the generation produced by random topology, which is very slow!)
+
+1     : AutoFrac (auto optimize variation operators)
+*****************************************
+*   DETAILS OF AB INITIO CALCULATIONS   * 
+*****************************************
+% abinitioCode 
+8  8  8  8  
+% ENDabinit
+
+% KresolStart
+0.14 0.12 0.10 0.08
+% Kresolend
+
+% commandExecutable
+srun --ntasks=8 --unbuffered  --exclusive  --mem-per-cpu=3200M --exact  --time=01:00:00  /gpfs/data/fs71990/cataldo2/programs_vsc5/QE-7.1/bin/pw.x  < qe.in > output 
+srun --ntasks=8 --unbuffered  --exclusive  --mem-per-cpu=3200M --exact  --time=01:00:00  /gpfs/data/fs71990/cataldo2/programs_vsc5/QE-7.1/bin/pw.x  < qe.in > output 
+srun --ntasks=8 --unbuffered  --exclusive  --mem-per-cpu=3200M --exact  --time=01:00:00  /gpfs/data/fs71990/cataldo2/programs_vsc5/QE-7.1/bin/pw.x  < qe.in > output 
+srun --ntasks=8 --unbuffered  --exclusive  --mem-per-cpu=3200M --exact  --time=01:00:00  /gpfs/data/fs71990/cataldo2/programs_vsc5/QE-7.1/bin/pw.x  < qe.in > output 
+% EndExecutable
+
+1         : whichCluster (0: no-job-script, 1: local submission, 2: remote submission)
+16        : numParallelCalcs
+200.00    : ExternalPressure 

@@ -1,0 +1,32 @@
+#!/bin/bash -l
+
+#SBATCH --job-name=US_XB
+#SBATCH --time=71:59:59
+#SBATCH --nodes=1
+#SBATCH --no-requeue
+#SBATCH --ntasks-per-node=128
+#SBATCH --partition=zen3_0512
+#SBATCH --qos=zen3_0512
+#SBATCH --cpus-per-task=1
+#SBATCH --distribution=pack
+
+unset SLURM_CPU_BIND_VERBOSE
+unset SLURM_CPU_BIND_TYPE
+unset SLURM_CPU_BIND_LIST
+unset SLURM_CPU_BIND
+
+module load compiler/2022.0.1 intel-mpi/2021.5.0 intel-mkl/2022.0.1
+export I_MPI_PMI_LIBRARY=/opt/sw/slurm/x86_64/alma8.5/22-05-2-1/lib/libpmi.so
+export LANG=C
+export LC_ALL=C
+
+VASP_PATH="/gpfs/data/fs71990/cataldo2/programs_vsc5/vasp.6.3.0/bin"
+export   VASP="${VASP_PATH}/vasp_std"
+USPEX_PATH="/gpfs/data/fs71990/cataldo2/programs_vsc5/USPEX_v10.5/application/archive"
+export USPEX=${USPEX_PATH}/USPEX
+
+echo "Current USPEX version.."
+which $USPEX
+$USPEX --version
+
+./run_uspex.sh 

@@ -1,0 +1,40 @@
+&CONTROL
+  calculation  = 'relax'
+  restart_mode = 'from_scratch'
+  prefix       = 'H3S'
+  wf_collect   = .false.
+  disk_io = 'none'
+  etot_conv_thr=5.0D-4
+  forc_conv_thr=5.0D-3
+  nstep = 150
+  pseudo_dir = "./"
+/
+&SYSTEM
+  ibrav     = 0
+  ecutwfc   = 60
+  ecutrho   = 240
+  nosym     = .true.
+  occupations = 'smearing'
+  smearing = 'marzari-vanderbilt'
+  degauss = 0.02
+/
+&ELECTRONS
+  conv_thr = 1.D-05
+  mixing_beta = 0.7
+  electron_maxstep = 100
+/
+&IONS
+  ion_dynamics = "bfgs"
+  trust_radius_max = 0.50
+/
+&CELL
+  cell_factor = 2.50
+  press = 2000
+  cell_dynamics = "none"
+/
+
+ATOMIC_SPECIES
+H   1.0078   H_ONCV_PBE_sr.upf
+S  32.065    S_ONCV_PBE_sr.upf
+
+!!! STEP 2 
