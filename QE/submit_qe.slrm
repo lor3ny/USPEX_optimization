@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+#SBATCH --job-name=qe_test
+#SBATCH --ntasks=4
+#SBATCH --time=00:30:00
+#SBATCH --partition=test
+
+QE_PATH=/home/cataldo/programs/QE-7.3/bin
+PW="${QE_PATH}/pw.x"
+
+NP=4
+
+mpirun -np $NP -x OMP_NUM_THREADS=1 $PW < pw.scf.in > pw.scf.out
